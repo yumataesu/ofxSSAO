@@ -1,4 +1,4 @@
-#version 450 core
+#version 330 core
 
 const int kernelSize = 64;
 const float bias = .1;

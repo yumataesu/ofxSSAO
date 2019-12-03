@@ -15,14 +15,15 @@ class SSAO
 {
 public:
 	SSAO(int width, int height) 
-	{          
-		if (!ssao_shader_.load("../../../../addons/ofxSSAO/assets/ssao")) { //of addon path
-			ssao_shader_.unload();
-			ssao_shader_.load("../../addons/ofxSSAO/assets/ssao"); // of local addon path
+	{
+        std::string ssao_path = "../../addons/ofxSSAO/assets/ssao";
+        std::string blur_path = "../../addons/ofxSSAO/assets/ssao";
+        
+		if (!ssao_shader_.load(ssao_path)) { //of addon path
+			ssao_shader_.load("../../" + ssao_path); // of local addon path
 		}
-		if (!blur_shader_.load("../../../../addons/ofxSSAO/assets/blur")) {
-			blur_shader_.unload();
-			blur_shader_.load("../../addons/ofxSSAO/assets/blur");
+		if (!blur_shader_.load(blur_path)) {
+			blur_shader_.load("../../" + blur_path);
 		}
 
         ofFbo::Settings settings;
@@ -99,7 +100,7 @@ private:
 	std::vector<ofVec3f> ssaoKernel;
 	GLuint noiseTexture;
 
-	GLuint SSAO::genNoiseTexture() {
+	GLuint genNoiseTexture() {
 
 		auto lerp = [&](float a, float b, float f) {
 			return a + f * (b - a);
